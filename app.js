@@ -4,7 +4,8 @@
   const SITE_NAME = "東北機材センター";
   const PIN_CODE = "2101";
   const PIN_KEY = "kourituka-pin-ok";
-  const PROPOSALS_COLLECTION = "proposals";
+  const IS_TEST_MODE = new URLSearchParams(location.search).get("test") === "1";
+  const PROPOSALS_COLLECTION = IS_TEST_MODE ? "proposals_test" : "proposals";
   const MAX_ENTRY_BYTES = 900000; // soft limit, keep well under Firestore's 1MiB/doc
 
   const firebaseConfig = {
@@ -811,7 +812,16 @@
   }
 
   // ---------- init ----------
+  function initTestModeBanner() {
+    if (!IS_TEST_MODE) return;
+    const banner = document.createElement("div");
+    banner.className = "test-mode-banner";
+    banner.textContent = "テストモード（本番の提出データには一切影響しません）";
+    document.body.insertBefore(banner, document.body.firstChild);
+  }
+
   function startApp() {
+    initTestModeBanner();
     initOtherToggles();
     initPhotoInput();
     initPhotoModal();

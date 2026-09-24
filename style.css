@@ -61,6 +61,18 @@ body {
   padding-bottom: 40px;
 }
 
+.test-mode-banner {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: #ff8c42;
+  color: #fff;
+  font-weight: bold;
+  font-size: 0.85rem;
+  text-align: center;
+  padding: 8px 12px;
+}
+
 .app-header {
   background: var(--color-primary);
   color: #fff;
